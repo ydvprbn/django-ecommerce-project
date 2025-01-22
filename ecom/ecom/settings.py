@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("secret_key")
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "store",
     "cart",
     "payment",
+    "whitenoise.runserver_nostatic",
+    "paypal.standard.ipn",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "ecom.urls"
@@ -81,8 +84,14 @@ WSGI_APPLICATION = "ecom.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": os.environ.get("password"),
+        "HOST": "roundhouse.proxy.rlwy.net",
+        "PORT": "30298",
     }
 }
 
@@ -123,6 +132,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = ["static/"]
+
+# White noise static stuff
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
