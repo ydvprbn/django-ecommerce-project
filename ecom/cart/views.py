@@ -21,8 +21,7 @@ def cart_summary(request):
 def cart_add(request):
     # Get the cart
     cart = Cart(request)
-
-    # Test for the POST
+    # test for POST
     if request.POST.get("action") == "post":
         # Get stuff
         product_id = int(request.POST.get("product_id"))
@@ -37,8 +36,8 @@ def cart_add(request):
         # Get Cart Quantity
         cart_quantity = cart.__len__()
 
-        # Return response
-        # response = JsonResponse({"Product Name: ": product.name})
+        # Return resonse
+        # response = JsonResponse({'Product Name: ': product.name})
         response = JsonResponse({"qty": cart_quantity})
         messages.success(request, ("Product Added To Cart..."))
         return response
@@ -49,10 +48,11 @@ def cart_delete(request):
     if request.POST.get("action") == "post":
         # Get stuff
         product_id = int(request.POST.get("product_id"))
-        # Call delete function in Cart
+        # Call delete Function in Cart
         cart.delete(product=product_id)
 
         response = JsonResponse({"product": product_id})
+        # return redirect('cart_summary')
         messages.success(request, ("Item Deleted From Shopping Cart..."))
         return response
 
@@ -67,6 +67,6 @@ def cart_update(request):
         cart.update(product=product_id, quantity=product_qty)
 
         response = JsonResponse({"qty": product_qty})
+        # return redirect('cart_summary')
         messages.success(request, ("Your Cart Has Been Updated..."))
-
         return response

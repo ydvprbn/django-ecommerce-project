@@ -3,11 +3,13 @@ from .models import Product, Category, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 
 from payment.forms import ShippingForm
 from payment.models import ShippingAddress
 
+from django import forms
 from django.db.models import Q
 import json
 from cart.cart import Cart
@@ -17,13 +19,13 @@ def search(request):
     # Determine if they filled out the form
     if request.method == "POST":
         searched = request.POST["searched"]
-        # Query the Products DB Model
+        # Query The Products DB Model
         searched = Product.objects.filter(
             Q(name__icontains=searched) | Q(description__icontains=searched)
         )
         # Test for null
         if not searched:
-            messages.success(request, "That Product Does Not Exits...Please try again!")
+            messages.success(request, "That Product Does Not Exist...Please try Again.")
             return render(request, "search.html", {})
         else:
             return render(request, "search.html", {"searched": searched})
@@ -33,21 +35,21 @@ def search(request):
 
 def update_info(request):
     if request.user.is_authenticated:
-        # Get current user
+        # Get Current User
         current_user = Profile.objects.get(user__id=request.user.id)
-        # Get current user's shipping info
+        # Get Current User's Shipping Info
         shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
 
-        # Get original user form
+        # Get original User Form
         form = UserInfoForm(request.POST or None, instance=current_user)
-        # Get user's shipping form
+        # Get User's Shipping Form
         shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
-
         if form.is_valid() or shipping_form.is_valid():
             # Save original form
             form.save()
             # Save shipping form
             shipping_form.save()
+
             messages.success(request, "Your Info Has Been Updated!!")
             return redirect("home")
         return render(
@@ -63,7 +65,6 @@ def update_password(request):
         current_user = request.user
         # Did they fill out the form
         if request.method == "POST":
-            # Do stuff
             form = ChangePasswordForm(current_user, request.POST)
             # Is the form valid
             if form.is_valid():
@@ -79,7 +80,8 @@ def update_password(request):
             form = ChangePasswordForm(current_user)
             return render(request, "update_password.html", {"form": form})
     else:
-        messages.success(request, "You Must Be Logged In To Access That Page!!")
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect("home")
 
 
 def update_user(request):
@@ -89,6 +91,7 @@ def update_user(request):
 
         if user_form.is_valid():
             user_form.save()
+
             login(request, current_user)
             messages.success(request, "User Has Been Updated!!")
             return redirect("home")
@@ -104,19 +107,18 @@ def category_summary(request):
 
 
 def category(request, foo):
-    # Replace Hypenes with Spaces
+    # Replace Hyphens with Spaces
     foo = foo.replace("-", " ")
-
     # Grab the category from the url
     try:
-        # Look up the category
+        # Look Up The Category
         category = Category.objects.get(name=foo)
         products = Product.objects.filter(category=category)
         return render(
             request, "category.html", {"products": products, "category": category}
         )
     except:
-        messages.success(request, ("That category does not exit..."))
+        messages.success(request, ("That Category Doesn't Exist..."))
         return redirect("home")
 
 
@@ -150,10 +152,10 @@ def login_user(request):
             if saved_cart:
                 # Convert to dictionary using JSON
                 converted_cart = json.loads(saved_cart)
-                # Add the loaded art dictionary to our session
+                # Add the loaded cart dictionary to our session
                 # Get the cart
                 cart = Cart(request)
-                # Loop through the cart and add the items from the database
+                # Loop thru the cart and add the items from the database
                 for key, value in converted_cart.items():
                     cart.db_add(product=key, quantity=value)
 
@@ -169,7 +171,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.success(request, ("You have been logged out!"))
+    messages.success(request, ("You have been logged out...Thanks for stopping by..."))
     return redirect("home")
 
 
@@ -191,7 +193,7 @@ def register_user(request):
         else:
             messages.success(
                 request,
-                ("Whoops! There was a problem registering, please try again... "),
+                ("Whoops! There was a problem Registering, please try again..."),
             )
             return redirect("register")
     else:
