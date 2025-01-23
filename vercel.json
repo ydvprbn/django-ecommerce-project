@@ -3,7 +3,7 @@
     "builds": [
       {
         "src": "ecom/wsgi.py",
-        "use": "npx vercel-sapper",
+        "use": "@vercel/python",
         "config": {
           "maxLambdaSize": "15mb",
           "runtime": "python3.9"
