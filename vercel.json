@@ -26,5 +26,6 @@
         "src": "/(.*)",
         "dest": "ecom/wsgi.py"
       }
-    ]
+    ],
+    "outputDirectory": "staticfiles"
 }
