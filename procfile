@@ -1,2 +1,0 @@
-web: gunicorn store.wsgi --log-gile
-web: python manage.py migrate && gunicorn store.wsgi
