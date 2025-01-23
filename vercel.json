@@ -19,9 +19,12 @@
     ],
     "routes": [
       {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
         "src": "/(.*)",
         "dest": "ecom/wsgi.py"
       }
-    ],
-    "outputDirectory": "staticfiles"
+    ]
 }
