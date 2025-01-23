@@ -1,4 +1,4 @@
-mkdir -p /ecom
-cd /ecom
-pip install -r requirements.txt 
-python3.9 manage.py collectstatic
+WORKDIR=/ecom
+cp requirements.txt $WORKDIR/requirements.txt
+pip install -r $WORKDIR/requirements.txt
+python3.9 $WORKDIR/manage.py collectstatic
