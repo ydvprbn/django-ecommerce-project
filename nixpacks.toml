@@ -5,12 +5,10 @@ packages = ["python310", "postgresql_16", "gcc"]
 commands = [
     "python -m venv /venv",
     ". /venv/bin/activate",
-    "pip install -r requirements.txt"
-]
-
-commands = [
+    "pip install -r requirements.txt",
     "python manage.py collectstatic --noinput"
 ]
+
 
 
 [phases.start]
