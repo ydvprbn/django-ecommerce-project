@@ -3,13 +3,18 @@ packages = ["python310", "postgresql_16", "gcc"]
 
 [phases.install]
 commands = [
-    "python -m venv /opt/venv",
-    ". /opt/venv/bin/activate",
+    "python -m venv /venv",
+    ". /venv/bin/activate",
     "pip install -r requirements.txt"
 ]
 
+commands = [
+    "python manage.py collectstatic --noinput"
+]
+
+
 [phases.start]
 commands = [
-    ". /opt/venv/bin/activate",
+    ". /venv/bin/activate",
     "gunicorn store.wsgi:application --bind 0.0.0.0:$PORT"
 ]
