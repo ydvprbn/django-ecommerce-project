@@ -28,11 +28,11 @@ SECRET_KEY = os.environ.get("secret_key")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "django-ecommerce-project-production-94e1.up.railway.app",
-    "https://django-ecommerce-project-production-94e1.up.railway.app",
+    "django-ecommerce-project-production-369e.up.railway.app",
+    "https://django-ecommerce-project-production-369e.up.railway.app",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://django-ecommerce-project-production-94e1.up.railway.app"
+    "https://django-ecommerce-project-production-369e.up.railway.app"
 ]
 
 # Application definition
