@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     "https://django-ecommerce-project-production-369e.up.railway.app",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://django-ecommerce-project-production-369e.up.railway.app"
+    "https://django-ecommerce-project-production-369e.up.railway.app",
 ]
 
 # Application definition
