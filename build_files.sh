@@ -1,4 +1,6 @@
-PROJECT_DIR=$(pwd)
-APP_DIR="$PROJECT_DIR/ecom"
-pip install -r "$PROJECT_DIR/requirements.txt"
-python3.9 "$APP_DIR/manage.py" collectstatic 
+# Install dependencies explicitly with Python 3.9
+python3.9 -m pip install --upgrade pip
+python3.9 -m pip install -r requirements.txt
+
+# Run collectstatic (ensure the path to manage.py is correct)
+python3.9 ecom/manage.py collectstatic --noinput
