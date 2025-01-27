@@ -128,7 +128,7 @@ def product(request, pk):
 
 
 def home(request):
-    products = Product.objects.all()
+    # products = Product.objects.all()
     return render(request, "home.html", {"products": products})
 
 
