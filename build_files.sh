@@ -5,5 +5,5 @@ python3.9 -m pip install -r requirements.txt
 # Run database migrations
 python3.9 ecom/manage.py migrate --noinput
 
-# Run collectstatic (ensure the path to manage.py is correct)
+# Run collectstatic 
 python3.9 ecom/manage.py collectstatic --noinput
