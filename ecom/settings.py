@@ -35,7 +35,7 @@ DEBUG = False
 #     "https://django-ecommerce-project-production-908d.up.railway.app",
 # ]
 
-ALLOWED_HOSTS = ["vercel.app"]
+ALLOWED_HOSTS = [".vercel.app", ".now.sh"]
 
 # Application definition
 
@@ -96,16 +96,15 @@ WSGI_APPLICATION = "ecom.wsgi.application"
 #     }
 # }
 
-password = os.environ["password"]
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": password,
-        "HOST": "monorail.proxy.rlwy.net",
-        "PORT": "33961",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
