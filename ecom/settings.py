@@ -100,8 +100,8 @@ DATABASES = {
         "NAME": "railway",
         "USER": "postgres",
         "PASSWORD": os.environ["password"],
-        "HOST": "viaduct.proxy.rlwy.net",
-        "PORT": "33355",
+        "HOST": "postgres-production-017e.up.railway.app",
+        "PORT": "5432",
     }
 }
 
