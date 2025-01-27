@@ -1,2 +1,2 @@
-# Run migrations first, then start Gunicorn
-web: python manage.py migrate && gunicorn store.wsgi --bind 0.0.0.0:$PORT --log-file -
+web: gunicorn store.wsgi --log-file 
+web: python manage.py migrate && gunicorn store.wsgi
