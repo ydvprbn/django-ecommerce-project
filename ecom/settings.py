@@ -27,13 +27,15 @@ SECRET_KEY = os.environ.get("secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "django-ecommerce-project-production-908d.up.railway.app",
-    "https://django-ecommerce-project-production-908d.up.railway.app",
-]
-CSRF_TRUSTED_ORIGINS = [
-    "https://django-ecommerce-project-production-908d.up.railway.app",
-]
+# ALLOWED_HOSTS = [
+#     "django-ecommerce-project-production-908d.up.railway.app",
+#     "https://django-ecommerce-project-production-908d.up.railway.app",
+# ]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://django-ecommerce-project-production-908d.up.railway.app",
+# ]
+
+ALLOWED_HOSTS = ["vercel.app"]
 
 # Application definition
 
