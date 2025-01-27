@@ -35,7 +35,7 @@ DEBUG = True
 #     "https://django-ecommerce-project-production-908d.up.railway.app",
 # ]
 
-ALLOWED_HOSTS = [".vercel.app", ".now.sh", "127.0.0.1"]
+ALLOWED_HOSTS = [".vercel.app", ".now.sh"]
 
 # Application definition
 
